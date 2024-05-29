@@ -1,0 +1,112 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+:};
+
+terminal linea, T_dato, 
+        BYTE,SHORT,INT,LONG,FLOAT,DOUBLE,BOOLEAN,CHAR,VERDADERO,FALSO,STRING,RETURN,include,
+     puntoComa, Identificador,igual,llaveApertura,llaveCierre,
+signoMenorQue,
+signoMayorQue,
+signoDosPuntos,
+signoAlmohoadilla,
+signoComa,
+signoMas,
+signoMenos,
+signoMultiplicacion,
+signoSlash,
+parentesisApertura,
+parentesisCierre,
+signoPunto,
+signoOr,
+using,
+namespace,
+classT,
+publicT,
+doubleT,
+charT,
+switchT,
+caseT,
+returnT,
+defaultT,
+endlT,
+pragmaT ,
+onceT ,
+whileT,
+continueT,
+ifT,
+elseT,
+trueT,
+falseT,
+DAY,
+    Numero, ERROR;
+
+non terminal INICIO, PALABRA_RESERVADA_NUM, PALABRA_RESERVADA_LETRA, PALABRA_RESERVADA_BOOLEANO, PARAMETROS,LINES;
+
+start with INICIO;
+
+INICIO ::= LINES | 
+           INICIO LINES
+;
+
+LINES::= PARAMETROS;
+
+PARAMETROS ::= PALABRA_RESERVADA_NUM Identificador puntoComa |
+               PALABRA_RESERVADA_LETRA Identificador puntoComa |
+               PALABRA_RESERVADA_BOOLEANO Identificador  puntoComa |
+               Identificador igual Identificador  puntoComa |
+               Identificador igual Numero  puntoComa |
+               PALABRA_RESERVADA_NUM Identificador igual Numero puntoComa |
+               PALABRA_RESERVADA_LETRA Identificador igual Identificador puntoComa |
+               PALABRA_RESERVADA_BOOLEANO Identificador igual FALSO  puntoComa |
+               PALABRA_RESERVADA_BOOLEANO Identificador igual VERDADERO  puntoComa 
+;
+
+PALABRA_RESERVADA_NUM ::= BYTE | SHORT | INT | LONG | FLOAT | RETURN | DOUBLE | include | llaveApertura | llaveCierre | 
+signoMenorQue |
+signoMayorQue |
+signoDosPuntos |
+signoAlmohoadilla |
+signoComa |
+signoMas |
+signoMenos |
+signoMultiplicacion |
+signoSlash |
+parentesisApertura |
+parentesisCierre |
+signoOr |
+using |
+namespace |
+classT |
+publicT |
+doubleT |
+charT |
+switchT |
+caseT |
+returnT |
+defaultT |
+endlT |
+pragmaT | 
+onceT  |
+whileT |
+continueT |
+ifT |
+elseT |
+trueT |
+falseT |
+DAY |
+signoPunto;
+PALABRA_RESERVADA_LETRA ::= CHAR | STRING ;
+PALABRA_RESERVADA_BOOLEANO::= FALSO | VERDADERO ;
